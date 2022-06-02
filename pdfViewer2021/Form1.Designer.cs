@@ -36,25 +36,26 @@ namespace pdfViewer2021
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.lblFileName = new System.Windows.Forms.Label();
             this.lblLastUpdate = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
+            this.lblDirectory = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtDirectory
             // 
-            this.txtDirectory.Location = new System.Drawing.Point(17, 16);
+            this.txtDirectory.Location = new System.Drawing.Point(20, 27);
             this.txtDirectory.Margin = new System.Windows.Forms.Padding(4);
             this.txtDirectory.Name = "txtDirectory";
             this.txtDirectory.Size = new System.Drawing.Size(356, 22);
             this.txtDirectory.TabIndex = 0;
+            this.txtDirectory.TextChanged += new System.EventHandler(this.txtDirectory_TextChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(201, 49);
+            this.button1.Location = new System.Drawing.Point(17, 52);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(173, 29);
+            this.button1.Size = new System.Drawing.Size(357, 29);
             this.button1.TabIndex = 1;
             this.button1.Text = "フォルダを参照";
             this.button1.UseVisualStyleBackColor = true;
@@ -97,17 +98,6 @@ namespace pdfViewer2021
             this.lblLastUpdate.TabIndex = 6;
             this.lblLastUpdate.Text = "最終更新";
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(17, 49);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(173, 29);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "文字列入力で表示";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // axAcroPDF1
             // 
             this.axAcroPDF1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -118,15 +108,24 @@ namespace pdfViewer2021
             this.axAcroPDF1.Margin = new System.Windows.Forms.Padding(4);
             this.axAcroPDF1.Name = "axAcroPDF1";
             this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
-            this.axAcroPDF1.Size = new System.Drawing.Size(500, 399);
+            this.axAcroPDF1.Size = new System.Drawing.Size(667, 493);
             this.axAcroPDF1.TabIndex = 4;
+            // 
+            // lblDirectory
+            // 
+            this.lblDirectory.AutoSize = true;
+            this.lblDirectory.Location = new System.Drawing.Point(20, 5);
+            this.lblDirectory.Name = "lblDirectory";
+            this.lblDirectory.Size = new System.Drawing.Size(98, 15);
+            this.lblDirectory.TabIndex = 8;
+            this.lblDirectory.Text = "参照ディレクトリ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 562);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.lblDirectory);
             this.Controls.Add(this.lblLastUpdate);
             this.Controls.Add(this.lblFileName);
             this.Controls.Add(this.axAcroPDF1);
@@ -153,7 +152,7 @@ namespace pdfViewer2021
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label lblFileName;
         private System.Windows.Forms.Label lblLastUpdate;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label lblDirectory;
     }
 }
 

@@ -66,20 +66,20 @@ namespace pdfViewer2021
         private void lstpdfFile_SelectedIndexChanged(object sender, EventArgs e)
         {
             string FileName = lstpdfFile.Items[lstpdfFile.SelectedIndex].ToString().Normalize();
-            lblLastUpdate.Text = "最終更新" + System.IO.File.GetLastWriteTime(FolderName + "\\" + FileName).ToString();
+            lblLastUpdate.Text = "最終更新" + System.IO.File.GetLastWriteTime(folderName + "\\" + FileName).ToString();
             lblFileName.Text = FileName;
-            bool a = axAcroPDF1.LoadFile(FolderName + "\\" + FileName);
-            axAcroPDF1.LoadFile(FolderName + "\\" + FileName);
+            bool a = axAcroPDF1.LoadFile(folderName + "\\" + FileName);
+            axAcroPDF1.LoadFile(folderName + "\\" + FileName);
 
         }
-        string FolderName;
+        string folderName;
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             FolderBrowserDialog fbDialog = new FolderBrowserDialog();
 
             // ダイアログの説明文を指定する
-            fbDialog.Description = "ダイアログの説明文";
+            fbDialog.Description = "開くディレクトリを選択";
 
             // デフォルトのフォルダを指定する
             fbDialog.SelectedPath = @"C:";
@@ -89,20 +89,20 @@ namespace pdfViewer2021
 
                 Console.WriteLine(fbDialog.SelectedPath);
                 //フォルダー名を取得
-                FolderName = fbDialog.SelectedPath;
-                txtDirectory.Text = FolderName;
+                folderName = fbDialog.SelectedPath;
+                lblDirectory.Text = folderName;
                 //リストボックスをクリア
                 lstpdfFile.Items.Clear();
                 //リストボックスに水平スクロールバーを表示
                 lstpdfFile.HorizontalScrollbar = true;
 
                 //フォルダー名が取得できたら
-                if (FolderName.Length > 1)
+                if (folderName.Length > 1)
                 {
                     //指定の拡張子のファイルだけ取得する場合
-                    foreach (string FileName in System.IO.Directory.GetFiles(FolderName, "*.pdf"))
+                    foreach (string fileName in System.IO.Directory.GetFiles(folderName, "*.pdf"))
                     {
-                        lstpdfFile.Items.Add(Path.GetFileName(FileName));
+                        lstpdfFile.Items.Add(Path.GetFileName(fileName));
                     }
                 }
             }
@@ -123,26 +123,6 @@ namespace pdfViewer2021
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            FolderName = txtDirectory.Text;
-            txtDirectory.Text = FolderName;
-            //リストボックスをクリア
-            lstpdfFile.Items.Clear();
-            //リストボックスに水平スクロールバーを表示
-            lstpdfFile.HorizontalScrollbar = true;
-
-            //フォルダー名が取得できたら
-            if (FolderName.Length > 1)
-            {
-                //指定の拡張子のファイルだけ取得する場合
-                foreach (string FileName in System.IO.Directory.GetFiles(FolderName, "*.pdf"))
-                {
-                    lstpdfFile.Items.Add(Path.GetFileName(FileName));
-                }
-            }
-
-        }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -162,5 +142,25 @@ namespace pdfViewer2021
 
         }
 
+        public static List<string> viewFileList;
+
+        private void txtDirectory_TextChanged(object sender, EventArgs e)
+        {
+            lstpdfFile.Items.Clear();
+            //リストボックスに水平スクロールバーを表示
+            lstpdfFile.HorizontalScrollbar = true;
+
+            //フォルダー名が取得できたら
+            if (folderName.Length > 1)
+            {
+                //指定の拡張子でかつテキストボックス内の名前を含むファイルだけ取得する場合
+                foreach (string fileName in System.IO.Directory.GetFiles(folderName, "*.pdf"))
+                {
+                    if (fileName.Contains(txtDirectory.Text, StringComparison.OrdinalIgnoreCase)){
+                        lstpdfFile.Items.Add(Path.GetFileName(fileName));
+                    }
+                }
+            }
+        }
     }
 }
