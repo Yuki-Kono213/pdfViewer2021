@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace pdfViewer2021
 {
@@ -76,20 +77,21 @@ namespace pdfViewer2021
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbDialog = new FolderBrowserDialog();
+            CommonOpenFileDialog fbDialog = new CommonOpenFileDialog();
 
             // ダイアログの説明文を指定する
-            fbDialog.Description = "開くディレクトリを選択";
+            fbDialog.Title = "開くディレクトリを選択";
 
             // デフォルトのフォルダを指定する
-            fbDialog.SelectedPath = @"C:";
+            fbDialog.InitialDirectory = @"C:";
+            fbDialog.IsFolderPicker = true;
             //フォルダを選択するダイアログを表示する
-            if (fbDialog.ShowDialog() == DialogResult.OK)
+            if (fbDialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
 
-                Console.WriteLine(fbDialog.SelectedPath);
+                Console.WriteLine(fbDialog.FileName);
                 //フォルダー名を取得
-                folderName = fbDialog.SelectedPath;
+                folderName = fbDialog.FileName;
                 lblDirectory.Text = folderName;
                 //リストボックスをクリア
                 lstpdfFile.Items.Clear();
